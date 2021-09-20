@@ -1,0 +1,8 @@
+{
+  "solution": {
+    "path": "Windows Community Toolkit.sln",
+    "projects": [
+      "Microsoft.Toolkit.Uwp.UI.Controls.DataGrid\\Microsoft.Toolkit.Uwp.UI.Controls.DataGrid.csproj",
+    ]
+  }
+}
