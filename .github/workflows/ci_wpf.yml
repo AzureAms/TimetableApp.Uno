@@ -40,47 +40,78 @@ jobs:
           uses: microsoft/setup-msbuild@v1.0.2
 
         # .NET core, framework dependent binaries.
-        - name: Publish
-          run: dotnet publish TimetableApp/TimetableApp.Skia.Wpf.Host/TimetableApp.Skia.Wpf.Host.csproj --configuration Release
+        - name: Publish .NET Core
+          run: dotnet publish TimetableApp/TimetableApp.Skia.Wpf.Host/TimetableApp.Skia.Wpf.Host.csproj -c Release -f netcoreapp3.1
 
-        - name: Publish package
+        - name: Publish package .NET Core
           uses: actions/upload-artifact@v2
           with:
-            name: TimetableApp.Skia.Wpf
+            name: TimetableApp.Skia.Wpf.NetCore
             path: TimetableApp/TimetableApp.Skia.Wpf.Host/bin/Release/netcoreapp3.1/publish/**
 
-        - name: Publish standalone (x86)
-          run: dotnet publish TimetableApp/TimetableApp.Skia.Wpf.Host/TimetableApp.Skia.Wpf.Host.csproj --configuration Release -p:PublishSingleFile=true -r win-x86 --self-contained false
+        - name: Publish standalone .NET Core (x86)
+          run: dotnet publish TimetableApp/TimetableApp.Skia.Wpf.Host/TimetableApp.Skia.Wpf.Host.csproj -c Release -f netcoreapp3.1 -p:PublishSingleFile=true -r win-x86 --self-contained false
 
-        - name: Publish standalone package (x86)
+        - name: Publish standalone package .NET Core (x86)
           uses: actions/upload-artifact@v2
           with:
-            name: TimetableApp.Skia.Wpf.Standalone.x86
+            name: TimetableApp.Skia.Wpf.NetCore.Standalone.x86
             path: TimetableApp/TimetableApp.Skia.Wpf.Host/bin/Release/netcoreapp3.1/win-x86/publish/TimetableApp.Skia.Wpf.Host.exe
 
-        - name: Publish standalone (x64)
-          run: dotnet publish TimetableApp/TimetableApp.Skia.Wpf.Host/TimetableApp.Skia.Wpf.Host.csproj --configuration Release -p:PublishSingleFile=true -r win-x64 --self-contained false
+        - name: Publish standalone .NET Core (x64)
+          run: dotnet publish TimetableApp/TimetableApp.Skia.Wpf.Host/TimetableApp.Skia.Wpf.Host.csproj -c Release -f netcoreapp3.1 -p:PublishSingleFile=true -r win-x64 --self-contained false
 
-        - name: Publish standalone package (x64)
+        - name: Publish standalone package .NET Core (x64)
           uses: actions/upload-artifact@v2
           with:
-            name: TimetableApp.Skia.Wpf.Standalone.x64
+            name: TimetableApp.Skia.Wpf.NetCore.Standalone.x64
             path: TimetableApp/TimetableApp.Skia.Wpf.Host/bin/Release/netcoreapp3.1/win-x64/publish/TimetableApp.Skia.Wpf.Host.exe
 
-        - name: Publish self-contained (x86)
-          run: dotnet publish TimetableApp/TimetableApp.Skia.Wpf.Host/TimetableApp.Skia.Wpf.Host.csproj --configuration Release -p:PublishSingleFile=true -r win-x86
+        - name: Publish self-contained .NET Core (x86)
+          run: dotnet publish TimetableApp/TimetableApp.Skia.Wpf.Host/TimetableApp.Skia.Wpf.Host.csproj -c Release -f netcoreapp3.1 -p:PublishSingleFile=true -r win-x86
 
-        - name: Publish self-contained package (x86)
+        - name: Publish self-contained package .NET Core (x86)
           uses: actions/upload-artifact@v2
           with:
-            name: TimetableApp.Skia.Wpf.SelfContained.x86
+            name: TimetableApp.Skia.Wpf.NetCore.SelfContained.x86
             path: TimetableApp/TimetableApp.Skia.Wpf.Host/bin/Release/netcoreapp3.1/win-x86/publish/TimetableApp.Skia.Wpf.Host.exe
 
-        - name: Publish self-contained (x64)
-          run: dotnet publish TimetableApp/TimetableApp.Skia.Wpf.Host/TimetableApp.Skia.Wpf.Host.csproj --configuration Release -p:PublishSingleFile=true -r win-x64
+        - name: Publish self-contained .NET Core (x64)
+          run: dotnet publish TimetableApp/TimetableApp.Skia.Wpf.Host/TimetableApp.Skia.Wpf.Host.csproj -c Release -f netcoreapp3.1 -p:PublishSingleFile=true -r win-x64
 
-        - name: Publish self-contained package (x64)
+        - name: Publish self-contained package .NET Core (x64)
           uses: actions/upload-artifact@v2
           with:
-            name: TimetableApp.Skia.Wpf.SelfContained.x64
+            name: TimetableApp.Skia.Wpf.NetCore.SelfContained.x64
             path: TimetableApp/TimetableApp.Skia.Wpf.Host/bin/Release/netcoreapp3.1/win-x64/publish/TimetableApp.Skia.Wpf.Host.exe
+
+        # .NET Framework beauty
+        - name: Publish portable .NET Framework (x64)
+          run: | 
+            dotnet publish TimetableApp/TimetableApp.Skia.Wpf.Host/TimetableApp.Skia.Wpf.Host.csproj -c Release -f net472 -r win-x64 --self-contained true
+            remove-item TimetableApp\TimetableApp.Skia.Wpf.Host\bin\Release\net472\win-x64\publish\*.pdb
+            remove-item TimetableApp\TimetableApp.Skia.Wpf.Host\bin\Release\net472\win-x64\publish\*.dylib
+            remove-item -Recurse -Force TimetableApp\TimetableApp.Skia.Wpf.Host\bin\Release\net472\win-x64\publish\x86
+            remove-item -Recurse -Force TimetableApp\TimetableApp.Skia.Wpf.Host\bin\Release\net472\win-x64\publish\x64
+            remove-item -Recurse -Force TimetableApp\TimetableApp.Skia.Wpf.Host\bin\Release\net472\win-x64\publish\arm64
+
+        - name: Publish portable .NET Framework package (x64)
+          uses: actions/upload-artifact@v2
+          with:
+            name: TimetableApp.Skia.Wpf.x64
+            path: TimetableApp/TimetableApp.Skia.Wpf.Host/bin/Release/net472/win-x64/publish/**
+
+        - name: Publish portable .NET Framework (x86)
+          run: | 
+            dotnet publish TimetableApp/TimetableApp.Skia.Wpf.Host/TimetableApp.Skia.Wpf.Host.csproj -c Release -f net472 -r win-x86 --self-contained true
+            remove-item TimetableApp\TimetableApp.Skia.Wpf.Host\bin\Release\net472\win-x86\publish\*.pdb
+            remove-item TimetableApp\TimetableApp.Skia.Wpf.Host\bin\Release\net472\win-x86\publish\*.dylib
+            remove-item -Recurse -Force TimetableApp\TimetableApp.Skia.Wpf.Host\bin\Release\net472\win-x86\publish\x86
+            remove-item -Recurse -Force TimetableApp\TimetableApp.Skia.Wpf.Host\bin\Release\net472\win-x86\publish\x64
+            remove-item -Recurse -Force TimetableApp\TimetableApp.Skia.Wpf.Host\bin\Release\net472\win-x86\publish\arm64
+
+        - name: Publish portable .NET Framework package (x86)
+          uses: actions/upload-artifact@v2
+          with:
+            name: TimetableApp.Skia.Wpf.x86
+            path: TimetableApp/TimetableApp.Skia.Wpf.Host/bin/Release/net472/win-x86/publish/**
