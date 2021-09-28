@@ -31,7 +31,36 @@ namespace TimetableApp.Pages
         public HomePage()
         {
             this.InitializeComponent();
+
+            #region #5760 Hack
+#if HAS_UNO
+            TodayDataGrid.LayoutUpdated += TodayDataGrid_LayoutUpdated;
+            ThisWeekDataGrid.LayoutUpdated += ThisWeekDataGrid_LayoutUpdated;
+#endif
+            #endregion
         }
+
+        #region 5760 Hack
+#if HAS_UNO
+        private void TodayDataGrid_LayoutUpdated(object sender, object e)
+        {
+            ForceRightEnabled(TodayDataGrid);
+        }
+
+        private void ThisWeekDataGrid_LayoutUpdated(object sender, object e)
+        {
+            ForceRightEnabled(ThisWeekDataGrid);
+        }
+
+        private void ForceRightEnabled(UIElement root)
+        {
+            foreach (var child in FindVisualChildren<FrameworkElement>(root))
+            {
+                child.AddHandler(UIElement.RightTappedEvent, (RightTappedEventHandler)((s, a) => { /*nop*/ }), /*handledEventsToo*/ true);
+            }
+        }
+#endif
+        #endregion
 
         public void ThisWeekDataGrid_LoadingRowGroup(object sender, DataGridRowGroupHeaderEventArgs args)
         {
