@@ -6,75 +6,78 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:toolkit="using:Uno.UI.Toolkit"
     mc:Ignorable="d">
 
-    <muxc:NavigationView x:Name="NavView"
+    <Grid toolkit:VisibleBoundsPadding.PaddingMask="All">
+        <muxc:NavigationView x:Name="NavView"
                          IsSettingsVisible="False"
                          IsBackButtonVisible="Visible"
                          CompactModeThresholdWidth="0"
                          ExpandedModeThresholdWidth="1008"
                          PaneTitle="Timetable">
-        <muxc:NavigationView.MenuItems>
-            <muxc:NavigationViewItem x:Name="Home" Icon="Home" Content="Home"/>
-            <muxc:NavigationViewItem x:Name="Settings"
+            <muxc:NavigationView.MenuItems>
+                <muxc:NavigationViewItem x:Name="Home" Icon="Home" Content="Home"/>
+                <muxc:NavigationViewItem x:Name="Settings"
                                      Content="Settings"
                                      Icon="Setting"
                                      SelectsOnInvoked="False">
-                <muxc:NavigationViewItem.MenuItems>
-                    <muxc:NavigationViewItem x:Name="AutoJoin"
+                    <muxc:NavigationViewItem.MenuItems>
+                        <muxc:NavigationViewItem x:Name="AutoJoin"
                                              Icon="{x:Bind AutoJoinButtonIcon, Mode=OneWay}"
                                              Content="AutoJoin"
                                              Tapped="AutoJoin_Tapped"
                                              SelectsOnInvoked="False"/>
-                    <muxc:NavigationViewItem x:Name="ChooseAllowEntryBeforeTime"
+                        <muxc:NavigationViewItem x:Name="ChooseAllowEntryBeforeTime"
                                              Content="Allow joining next lesson before..."
                                              Tapped="ChooseAllowEntryBeforeTime_Tapped"
                                              SelectsOnInvoked="False"/>
-                    <muxc:NavigationViewItem x:Name="ChooseReportBeforeTime"
+                        <muxc:NavigationViewItem x:Name="ChooseReportBeforeTime"
                                              Content="Report next lesson before..."
                                              Tapped="ChooseReportBeforeTime_Tapped"
                                              SelectsOnInvoked="False"/>
-                </muxc:NavigationViewItem.MenuItems>
-            </muxc:NavigationViewItem>
-            <muxc:NavigationViewItem x:Name="Tools" Content="Tools" SelectsOnInvoked="False">
-                <muxc:NavigationViewItem.Icon>
-                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEC7A;"/>
-                </muxc:NavigationViewItem.Icon>
-                <muxc:NavigationViewItem.MenuItems>
-                    <muxc:NavigationViewItem x:Name="Load" 
+                    </muxc:NavigationViewItem.MenuItems>
+                </muxc:NavigationViewItem>
+                <muxc:NavigationViewItem x:Name="Tools" Content="Tools" SelectsOnInvoked="False">
+                    <muxc:NavigationViewItem.Icon>
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEC7A;"/>
+                    </muxc:NavigationViewItem.Icon>
+                    <muxc:NavigationViewItem.MenuItems>
+                        <muxc:NavigationViewItem x:Name="Load" 
                                              Icon="Download" 
                                              Content="Load new timetable..."
                                              Tapped="Load_Tapped"
                                              SelectsOnInvoked="False"/>
-                    <muxc:NavigationViewItem x:Name="Sync"
+                        <muxc:NavigationViewItem x:Name="Sync"
                                              Icon="Sync"
                                              Content="Update timetable..."
                                              Tapped="Sync_Tapped"
                                              SelectsOnInvoked="False"/>
-                </muxc:NavigationViewItem.MenuItems>
-            </muxc:NavigationViewItem>
-            <muxc:NavigationViewItem x:Name="Help" Icon="Help" Content="Help" SelectsOnInvoked="False">
-                <muxc:NavigationViewItem.MenuItems>
-                    <muxc:NavigationViewItem x:Name="About"
+                    </muxc:NavigationViewItem.MenuItems>
+                </muxc:NavigationViewItem>
+                <muxc:NavigationViewItem x:Name="Help" Icon="Help" Content="Help" SelectsOnInvoked="False">
+                    <muxc:NavigationViewItem.MenuItems>
+                        <muxc:NavigationViewItem x:Name="About"
                                              Content="About"
                                              Tapped="About_Tapped"
                                              SelectsOnInvoked="False">
-                        <muxc:NavigationViewItem.Icon>
-                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE946;"/>
-                        </muxc:NavigationViewItem.Icon>
-                    </muxc:NavigationViewItem>
-                    <muxc:NavigationViewItem x:Name="BugReport" 
+                            <muxc:NavigationViewItem.Icon>
+                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE946;"/>
+                            </muxc:NavigationViewItem.Icon>
+                        </muxc:NavigationViewItem>
+                        <muxc:NavigationViewItem x:Name="BugReport" 
                                              Content="Report a bug..."
                                              Tapped="BugReport_Tapped"
                                              SelectsOnInvoked="False">
-                        <muxc:NavigationViewItem.Icon>
-                            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEBE8;"/>
-                        </muxc:NavigationViewItem.Icon>
-                    </muxc:NavigationViewItem>
-                </muxc:NavigationViewItem.MenuItems>
-            </muxc:NavigationViewItem>
-        </muxc:NavigationView.MenuItems>
-        <Frame x:Name="ContentFrame" x:FieldModifier="Public">
-        </Frame>
-    </muxc:NavigationView>
+                            <muxc:NavigationViewItem.Icon>
+                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEBE8;"/>
+                            </muxc:NavigationViewItem.Icon>
+                        </muxc:NavigationViewItem>
+                    </muxc:NavigationViewItem.MenuItems>
+                </muxc:NavigationViewItem>
+            </muxc:NavigationView.MenuItems>
+            <Frame x:Name="ContentFrame" x:FieldModifier="Public">
+            </Frame>
+        </muxc:NavigationView>
+    </Grid>
 </Page>
