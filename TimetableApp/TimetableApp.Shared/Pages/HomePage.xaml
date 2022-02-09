@@ -85,6 +85,48 @@
                 </wct:DataGrid.Columns>
             </wct:DataGrid>
         </PivotItem>
+        <PivotItem Header="Tomorrow">
+            <wct:DataGrid x:Name="TomorrowDataGrid"
+                          AutoGenerateColumns="False"
+                          CanUserReorderColumns="False"
+                          CanUserSortColumns="False"
+                          IsReadOnly="True"
+                          RightTapped="DataGrid_RightTapped"
+                          ItemsSource="{x:Bind ViewModel.TomorrowLessons, Mode=OneWay}">
+                <wct:DataGrid.Columns>
+                    <wct:DataGridTextColumn 
+                        Header="Subject" 
+                        Width="Auto"
+                        FontSize="11" 
+                        Binding="{Binding Subject}"/>
+                    <wct:DataGridTextColumn 
+                        Header="Teacher Name" 
+                        Width="Auto"
+                        FontSize="11"
+                        Binding="{Binding TeacherName}"/>
+                    <wct:DataGridTextColumn 
+                        Header="Start Time" 
+                        Width="Auto"
+                        FontSize="11"
+                        Binding="{Binding StartTime}"/>
+                    <wct:DataGridTextColumn 
+                        Header="End Time" 
+                        Width="Auto"
+                        FontSize="11"
+                        Binding="{Binding EndTime}"/>
+                    <wct:DataGridTextColumn 
+                        Header="OneClick" 
+                        Width="Auto"
+                        FontSize="11"
+                        Binding="{Binding SupportsOneClick}"/>
+                    <wct:DataGridTextColumn 
+                        Header="Credentials" 
+                        Width="Auto"
+                        FontSize="11"
+                        Binding="{Binding Credentials}"/>
+                </wct:DataGrid.Columns>
+            </wct:DataGrid>
+        </PivotItem>
         <PivotItem Header="This week">
             <wct:DataGrid x:Name="ThisWeekDataGrid"
                           AutoGenerateColumns="False"

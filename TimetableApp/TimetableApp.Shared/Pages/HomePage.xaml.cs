@@ -35,6 +35,7 @@ namespace TimetableApp.Pages
             #region #5760 Hack
 #if HAS_UNO
             TodayDataGrid.LayoutUpdated += TodayDataGrid_LayoutUpdated;
+            TomorrowDataGrid.LayoutUpdated += TomorrowDataGrid_LayoutUpdated;
             ThisWeekDataGrid.LayoutUpdated += ThisWeekDataGrid_LayoutUpdated;
 #endif
             #endregion
@@ -45,6 +46,11 @@ namespace TimetableApp.Pages
         private void TodayDataGrid_LayoutUpdated(object sender, object e)
         {
             ForceRightEnabled(TodayDataGrid);
+        }
+        
+        private void TomorrowDataGrid_LayoutUpdated(object sender, object e)
+        {
+            ForceRightEnabled(TomorrowDataGrid);
         }
 
         private void ThisWeekDataGrid_LayoutUpdated(object sender, object e)
