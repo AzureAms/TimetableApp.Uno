@@ -37,6 +37,9 @@ jobs:
         # - name: Test
         #  run: dotnet test
 
+        - name: Edit TimetableApp's CORS Server
+          run: ./TimetableApp/TimetableApp.Wasm/GenerateWasmScripts.ps1 ${{ secrets.CORS_SERVER }}
+
         # Generate the website
         - name: Publish
           run: dotnet publish TimetableApp/TimetableApp.Wasm/TimetableApp.Wasm.csproj --configuration Release

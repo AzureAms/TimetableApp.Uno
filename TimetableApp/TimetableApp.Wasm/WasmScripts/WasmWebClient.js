@@ -1,5 +1,5 @@
 ﻿async function FetchToBuffer(url) {
-    var buffer = await fetch('https://cors.bridged.cc/' + url)
+    var buffer = await fetch(url)
         .then(response => response.arrayBuffer());
     var ptr = Module._malloc(buffer.byteLength);
     var responseBuffer = new Uint8Array(buffer);
