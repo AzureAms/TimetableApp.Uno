@@ -28,6 +28,10 @@ jobs:
     steps:
         # Checkout the code
         - uses: actions/checkout@v2
+          with:
+            # For the DataGrid
+            fetch-depth: 0
+            submodules: 'recursive'
 
         # Install .NET Core SDK
         - name: Setup .NET SDK
