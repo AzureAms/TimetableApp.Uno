@@ -30,60 +30,59 @@ jobs:
         - uses: actions/checkout@v2
 
         # Install .NET Core SDK
-        - name: Setup .NET
-          run: |
-            Invoke-WebRequest 'https://dot.net/v1/dotnet-install.ps1' -OutFile 'dotnet-install.ps1'
-            ./dotnet-install.ps1 -Channel Current
-          shell: pwsh
+        - name: Setup .NET SDK
+          uses: actions/setup-dotnet@v1
+          with:
+            dotnet-version: '6.0.x'
 
         - name: Setup MSBuild
           uses: microsoft/setup-msbuild@v1.0.2
 
         # .NET core, framework dependent binaries.
         - name: Publish .NET Core
-          run: dotnet publish TimetableApp/TimetableApp.Skia.Wpf.Host/TimetableApp.Skia.Wpf.Host.csproj -c Release -f netcoreapp3.1
+          run: dotnet publish TimetableApp/TimetableApp.Skia.Wpf.Host/TimetableApp.Skia.Wpf.Host.csproj -c Release -f net6.0-windows
 
         - name: Publish package .NET Core
           uses: actions/upload-artifact@v2
           with:
             name: TimetableApp.Skia.Wpf.NetCore
-            path: TimetableApp/TimetableApp.Skia.Wpf.Host/bin/Release/netcoreapp3.1/publish/**
+            path: TimetableApp/TimetableApp.Skia.Wpf.Host/bin/Release/net6.0-windows/publish/**
 
         - name: Publish standalone .NET Core (x86)
-          run: dotnet publish TimetableApp/TimetableApp.Skia.Wpf.Host/TimetableApp.Skia.Wpf.Host.csproj -c Release -f netcoreapp3.1 -p:PublishSingleFile=true -r win-x86 --self-contained false
+          run: dotnet publish TimetableApp/TimetableApp.Skia.Wpf.Host/TimetableApp.Skia.Wpf.Host.csproj -c Release -f net6.0-windows -p:PublishSingleFile=true -r win-x86 --self-contained false
 
         - name: Publish standalone package .NET Core (x86)
           uses: actions/upload-artifact@v2
           with:
             name: TimetableApp.Skia.Wpf.NetCore.Standalone.x86
-            path: TimetableApp/TimetableApp.Skia.Wpf.Host/bin/Release/netcoreapp3.1/win-x86/publish/TimetableApp.Skia.Wpf.Host.exe
+            path: TimetableApp/TimetableApp.Skia.Wpf.Host/bin/Release/net6.0-windows/win-x86/publish/TimetableApp.Skia.Wpf.Host.exe
 
         - name: Publish standalone .NET Core (x64)
-          run: dotnet publish TimetableApp/TimetableApp.Skia.Wpf.Host/TimetableApp.Skia.Wpf.Host.csproj -c Release -f netcoreapp3.1 -p:PublishSingleFile=true -r win-x64 --self-contained false
+          run: dotnet publish TimetableApp/TimetableApp.Skia.Wpf.Host/TimetableApp.Skia.Wpf.Host.csproj -c Release -f net6.0-windows -p:PublishSingleFile=true -r win-x64 --self-contained false
 
         - name: Publish standalone package .NET Core (x64)
           uses: actions/upload-artifact@v2
           with:
             name: TimetableApp.Skia.Wpf.NetCore.Standalone.x64
-            path: TimetableApp/TimetableApp.Skia.Wpf.Host/bin/Release/netcoreapp3.1/win-x64/publish/TimetableApp.Skia.Wpf.Host.exe
+            path: TimetableApp/TimetableApp.Skia.Wpf.Host/bin/Release/net6.0-windows/win-x64/publish/TimetableApp.Skia.Wpf.Host.exe
 
         - name: Publish self-contained .NET Core (x86)
-          run: dotnet publish TimetableApp/TimetableApp.Skia.Wpf.Host/TimetableApp.Skia.Wpf.Host.csproj -c Release -f netcoreapp3.1 -p:PublishSingleFile=true -r win-x86
+          run: dotnet publish TimetableApp/TimetableApp.Skia.Wpf.Host/TimetableApp.Skia.Wpf.Host.csproj -c Release -f net6.0-windows -p:PublishSingleFile=true -r win-x86
 
         - name: Publish self-contained package .NET Core (x86)
           uses: actions/upload-artifact@v2
           with:
             name: TimetableApp.Skia.Wpf.NetCore.SelfContained.x86
-            path: TimetableApp/TimetableApp.Skia.Wpf.Host/bin/Release/netcoreapp3.1/win-x86/publish/TimetableApp.Skia.Wpf.Host.exe
+            path: TimetableApp/TimetableApp.Skia.Wpf.Host/bin/Release/net6.0-windows/win-x86/publish/TimetableApp.Skia.Wpf.Host.exe
 
         - name: Publish self-contained .NET Core (x64)
-          run: dotnet publish TimetableApp/TimetableApp.Skia.Wpf.Host/TimetableApp.Skia.Wpf.Host.csproj -c Release -f netcoreapp3.1 -p:PublishSingleFile=true -r win-x64
+          run: dotnet publish TimetableApp/TimetableApp.Skia.Wpf.Host/TimetableApp.Skia.Wpf.Host.csproj -c Release -f net6.0-windows -p:PublishSingleFile=true -r win-x64
 
         - name: Publish self-contained package .NET Core (x64)
           uses: actions/upload-artifact@v2
           with:
             name: TimetableApp.Skia.Wpf.NetCore.SelfContained.x64
-            path: TimetableApp/TimetableApp.Skia.Wpf.Host/bin/Release/netcoreapp3.1/win-x64/publish/TimetableApp.Skia.Wpf.Host.exe
+            path: TimetableApp/TimetableApp.Skia.Wpf.Host/bin/Release/net6.0-windows/win-x64/publish/TimetableApp.Skia.Wpf.Host.exe
 
         # .NET Framework beauty
         - name: Publish portable .NET Framework (x64)
