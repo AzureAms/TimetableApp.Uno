@@ -253,7 +253,7 @@ namespace TimetableApp.Core
                         {
                             System.Diagnostics.Debug.WriteLine($"Automatically updating from {timetable.UpdateURL}");
 
-                            timetable.UpdateAsync().ContinueWith((task) =>
+                            _ = timetable.UpdateAsync().ContinueWith((task) =>
                             {
                                 System.Diagnostics.Debug.WriteLine($"Done updating from {timetable.UpdateURL}");
                                 timetable.Loaded?.Invoke(timetable, EventArgs.Empty);
