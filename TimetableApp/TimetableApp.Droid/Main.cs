@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -10,12 +9,14 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Com.Nostra13.Universalimageloader.Core;
+using Uno.UI;
 using Windows.UI.Xaml.Media;
 
 namespace TimetableApp.Droid
 {
 	[global::Android.App.ApplicationAttribute(
 		Label = "@string/ApplicationName",
+		Icon = "@mipmap/icon",
 		LargeHeap = true,
 		HardwareAccelerated = true,
 		Theme = "@style/AppTheme"
@@ -26,6 +27,10 @@ namespace TimetableApp.Droid
 			: base(() => new App(), javaReference, transfer)
 		{
 			ConfigureUniversalImageLoader();
+
+			// HACK: To allow our TimeSpanPicker dialogs to work:
+			// See: https://github.com/unoplatform/uno/issues/2533
+			FeatureConfiguration.Popup.UseNativePopup = false;
 		}
 
 		private void ConfigureUniversalImageLoader()

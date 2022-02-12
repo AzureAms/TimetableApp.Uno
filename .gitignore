@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# TimetableApp's CORS server.
+/TimetableApp/TimetableApp.Wasm/WasmWebClient.CorsServer.cs

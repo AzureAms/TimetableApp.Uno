@@ -17,7 +17,7 @@
     <AndroidUseAapt2>true</AndroidUseAapt2>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>v10.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v12.0</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <AndroidUseIntermediateDesignerFile>True</AndroidUseIntermediateDesignerFile>
     <ResourcesDirectory>..\TimetableApp.Shared\Strings</ResourcesDirectory>
@@ -52,6 +52,8 @@
     <EnableLLVM>true</EnableLLVM>
     <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
     <AndroidSupportedAbis>armeabi-v7a;x86;x86_64;arm64-v8a</AndroidSupportedAbis>
+    <AndroidEnableProfiledAot>true</AndroidEnableProfiledAot>
+    <MandroidI18n />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
@@ -64,16 +66,19 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="ToastNotification.Uno">
-      <Version>0.1.0-dev.88</Version>
+      <Version>0.1.5</Version>
     </PackageReference>
     <PackageReference Include="Uno.Microsoft.Toolkit.Uwp.UI.Controls.DataGrid">
-      <Version>7.0.0</Version>
+      <Version>7.1.11</Version>
     </PackageReference>
-    <PackageReference Include="Uno.UI" Version="3.9.1" />
-    <PackageReference Include="Uno.UI.RemoteControl" Version="3.9.1" Condition="'$(Configuration)'=='Debug'" />
-    <PackageReference Include="Uno.UniversalImageLoader" Version="1.9.33" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
+    <PackageReference Include="Uno.UI" Version="4.0.13" />
+    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging">
+      <Version>4.0.13</Version>
+    </PackageReference>
+    <PackageReference Include="Uno.UI.RemoteControl" Version="4.0.13" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.UniversalImageLoader" Version="1.9.35" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
@@ -90,7 +95,13 @@
     <AndroidResource Include="Resources\values\Strings.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\Icon.png" />
+    <AndroidResource Include="Resources\mipmap-hdpi\icon.png" />
+    <AndroidResource Include="Resources\mipmap-ldpi\icon.png" />
+    <AndroidResource Include="Resources\mipmap-mdpi\icon.png" />
+    <AndroidResource Include="Resources\mipmap-tvdpi\icon.png" />
+    <AndroidResource Include="Resources\mipmap-xhdpi\icon.png" />
+    <AndroidResource Include="Resources\mipmap-xxhdpi\icon.png" />
+    <AndroidResource Include="Resources\mipmap-xxxhdpi\icon.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
@@ -100,8 +111,6 @@
   </ItemGroup>
   <Import Project="..\TimetableApp.Shared\TimetableApp.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
-  <!-- This will force the generation of the APK when not building inside visual studio -->
-  <Target Name="GenerateBuild" DependsOnTargets="SignAndroidPackage" AfterTargets="Build" Condition="'$(BuildingInsideVisualStudio)'==''" />
   <Target Name="Issue3897Workaround" Condition=" '$(ManagedDesignTimeBuild)' == 'True' " AfterTargets="_RemoveLegacyDesigner">
     <!-- See https://github.com/unoplatform/uno/issues/3897 and https://github.com/xamarin/xamarin-android/issues/5069 for more details -->
     <ItemGroup>

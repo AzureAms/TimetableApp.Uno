@@ -27,21 +27,25 @@ jobs:
       PACKAGE_NAME: com.azureams.TimetableApp
 
     name: Build app (Android)
-    runs-on: macos-latest
+    # Also need to run on Windows Server 2022
+    runs-on: windows-2022
 
     steps:
     - uses: actions/checkout@v2
-    - name: Set default Xamarin SDK versions
-      run: |
-        $VM_ASSETS/select-xamarin-sdk-v2.sh --mono=6.10 --android=10.2
 
-    - name: Setup .NET Core SDK 5.0.x
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.1
+      with:
+        # Use Visual Studio 2022 or later to avoid some dumb JDK-related errors. 
+        vs-version: '[17.0,)'
+
+    - name: Setup .NET SDK
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '5.0.x'
+        dotnet-version: '6.0.x'
 
     - name: Restore
-      run: nuget restore TimetableApp.Uno.NonWindows.sln
+      run: nuget restore TimetableApp.Uno.sln
 
     - name: Build
       run: msbuild TimetableApp/TimetableApp.Droid/TimetableApp.Droid.csproj /t:PackageForAndroid /p:Configuration=Release

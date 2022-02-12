@@ -4,16 +4,23 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="ToastNotification.Uno.Wpf" Version="0.1.0-dev.88" />
-    <PackageReference Include="Uno.Microsoft.Toolkit.Uwp.UI.Controls.DataGrid" Version="7.0.0" />
-    <PackageReference Include="Uno.UI.Skia.Wpf" Version="3.9.1" />
-    <PackageReference Include="Uno.UI.RemoteControl" Version="3.9.1" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="ToastNotification.Uno.Wpf" Version="0.1.5" />
+    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.0.13" />
+    <PackageReference Include="Uno.UI.Skia.Wpf" Version="4.2.0-dev.35" />
+    <PackageReference Include="Uno.UI.RemoteControl" Version="4.2.0-dev.35" Condition="'$(Configuration)'=='Debug'" />
   </ItemGroup>
   <ItemGroup>
     <UpToDateCheckInput Include="..\TimetableApp.Shared\**\*.xaml" />
   </ItemGroup>
   <Import Project="..\TimetableApp.Shared\TimetableApp.Shared.projitems" Label="Shared" />
+  <!-- 
+    Yes, we could've included Uno Platform's official nuget package. 
+    Sadly, it's strongly named, and will throw exceptions on .NET Framework
+  -->
+  <ItemGroup>
+    <ProjectReference Include="..\..\WCT\Microsoft.Toolkit.Uwp.UI.Controls.DataGrid\Microsoft.Toolkit.Uwp.UI.Controls.DataGrid.csproj" />
+  </ItemGroup>
 </Project>

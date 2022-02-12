@@ -7,7 +7,7 @@ using Uno.Foundation;
 
 namespace TimetableApp.Core
 {
-    public class WasmWebClient : IDisposable
+    public partial class WasmWebClient : IDisposable
     {
         public static async Task FetchNoCors(string url)
         {
@@ -32,7 +32,7 @@ namespace TimetableApp.Core
                     {{ // buffer is an ArrayBuffer
                         return Array.prototype.map.call(new Uint8Array(buffer), x => ('00' + x.toString(16)).slice(-2)).join('');
                     }}
-                    return fetch('https://cors.bridged.cc/{url}')
+                    return fetch('{CorsServer}/{url}')
                     .then(response => response.blob())
                     .then(blob => blob.arrayBuffer())
                     .then(buffer => buf2hex(buffer));
@@ -43,7 +43,7 @@ namespace TimetableApp.Core
 
         public async Task<byte[]> DownloadDataTaskAsync(string url)
         {
-            var result = await WebAssemblyRuntime.InvokeAsync($@"FetchToBuffer('{WebAssemblyRuntime.EscapeJs(url)}')");
+            var result = await WebAssemblyRuntime.InvokeAsync($@"FetchToBuffer('{WebAssemblyRuntime.EscapeJs($"{CorsServer}/{url}")}')");
             long[] ints = result.Split(',').Select(x => long.Parse(x)).ToArray();
             IntPtr ptr = (IntPtr)ints[0];
             int length = (int)ints[1];
@@ -51,7 +51,7 @@ namespace TimetableApp.Core
             byte[] managedArray = new byte[length];
             Marshal.Copy(ptr, managedArray, 0, length);
 
-            WebAssemblyRuntime.InvokeAsync($@"Free({ints[0]})");
+            WebAssemblyRuntime.InvokeJS($@"Free({ints[0]})");
 
             return managedArray;
         }

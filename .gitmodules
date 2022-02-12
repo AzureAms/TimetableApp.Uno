@@ -1,0 +1,3 @@
+[submodule "WCT"]
+	path = WCT
+	url = https://github.com/trungnt2910/Uno.WindowsCommunityToolkit.DataGrid

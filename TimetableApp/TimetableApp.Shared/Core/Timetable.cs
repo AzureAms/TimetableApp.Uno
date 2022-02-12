@@ -167,7 +167,7 @@ namespace TimetableApp.Core
                 }
                 catch { }
 
-                SaveAsync();
+                _ = SaveAsync();
 
                 return null;
             }
@@ -211,6 +211,11 @@ namespace TimetableApp.Core
             }
             finally
             {
+                if (!string.IsNullOrEmpty(UpdateURL))
+                {
+                    // Auto-update and be quiet.
+                    _ = await UpdateAsync();
+                }
                 Loaded?.Invoke(this, EventArgs.Empty);
             }
         }
@@ -226,7 +231,7 @@ namespace TimetableApp.Core
                 if (PlatformHelper.RuntimePlatform == Platform.WASM)
                 {
                     var timetable = new Timetable();
-                    timetable.ReloadAsync();
+                    _ = timetable.ReloadAsync();
                     return timetable;
                 }
                 using (var stream = File.OpenText(DataFilePath))
@@ -240,7 +245,24 @@ namespace TimetableApp.Core
                     {
                         timetable = new Timetable();
                         // Yes, no await doesn't do any harm. The UI can continue work normally.
-                        timetable.SaveAsync();
+                        _ = timetable.SaveAsync();
+                    }
+                    else
+                    {
+                        if (!string.IsNullOrEmpty(timetable.UpdateURL))
+                        {
+                            System.Diagnostics.Debug.WriteLine($"Automatically updating from {timetable.UpdateURL}");
+
+                            _ = timetable.UpdateAsync().ContinueWith((task) =>
+                            {
+                                System.Diagnostics.Debug.WriteLine($"Done updating from {timetable.UpdateURL}");
+                                timetable.Loaded?.Invoke(timetable, EventArgs.Empty);
+                            });
+                        }
+                        else
+                        {
+                            timetable.Loaded?.Invoke(timetable, EventArgs.Empty);
+                        }
                     }
                     return timetable;
                 }
@@ -248,7 +270,7 @@ namespace TimetableApp.Core
             catch
             {
                 var timetable = new Timetable();
-                timetable.SaveAsync();
+                _ = timetable.SaveAsync();
                 return timetable;
             }
         }

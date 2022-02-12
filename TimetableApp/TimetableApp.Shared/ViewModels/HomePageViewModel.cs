@@ -71,6 +71,12 @@ namespace TimetableApp.ViewModels
             get => todayLessons;
             set => SetProperty(ref todayLessons, value);
         }
+        private ObservableCollection<Lesson> tomorrowLessons = new ObservableCollection<Lesson>();
+        public ObservableCollection<Lesson> TomorrowLessons
+        {
+            get => tomorrowLessons;
+            set => SetProperty(ref tomorrowLessons, value);
+        }
         private CollectionViewSource weekLessons = new CollectionViewSource();
         public CollectionViewSource WeekLessons
         {
@@ -83,7 +89,7 @@ namespace TimetableApp.ViewModels
         {
             periodicTimer = ThreadPoolTimer.CreatePeriodicTimer((source) => Periodic(), TimeSpan.FromSeconds(1));
             Data.Timetable.OnSucessfulUpdate += (sender, args) => { RunOnMainThreadAsync(ReloadTabs); };
-            RunOnMainThreadAsync(ReloadToday);
+            RunOnMainThreadAsync(ReloadTodayAndTomorrow);
             RunOnMainThreadAsync(ReloadThisWeek);
         }
 
@@ -119,7 +125,7 @@ namespace TimetableApp.ViewModels
 
             if (lastCheck.DayOfYear != currentCheck.DayOfYear)
             {
-                await RunOnMainThreadAsync(ReloadToday);
+                await RunOnMainThreadAsync(ReloadTodayAndTomorrow);
             }
             lastCheck = currentCheck;
         }
@@ -159,13 +165,19 @@ namespace TimetableApp.ViewModels
             }
         }
 
-        public void ReloadToday()
+        public void ReloadTodayAndTomorrow()
         {
             var day = (int)DateTime.Now.DayOfWeek;
             todayLessons.Clear();
             foreach (var l in Data.Timetable.Lessons[day])
             {
                 todayLessons.Add(l);
+            }
+            tomorrowLessons.Clear();
+            var nextDay = (day + 1) % Data.Timetable.Lessons.Length;
+            foreach (var l in Data.Timetable.Lessons[nextDay])
+            {
+                tomorrowLessons.Add(l);
             }
         }
 
@@ -193,7 +205,7 @@ namespace TimetableApp.ViewModels
 
         private void ReloadTabs()
         {
-            ReloadToday();
+            ReloadTodayAndTomorrow();
             ReloadThisWeek();
         }
 

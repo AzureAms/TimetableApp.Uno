@@ -83,7 +83,7 @@ namespace Windows.UI.Popups
 						dialog.ContentArea.Add(label);
 						label.Show();
 
-						if (Commands.Empty())
+						if (Commands.Count == 0)
 						{
 							Commands.Add(new UICommand("Close"));
 						}

@@ -1,11 +1,17 @@
 ﻿<Application
-    x:Class="TimetableApp.App"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:TimetableApp">
+	x:Class="TimetableApp.App"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:local="using:TimetableApp">
 	
 	<Application.Resources>
-		<XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Hack. See: https://github.com/unoplatform/uno/issues/7635 -->
+                <ResourceDictionary Source="ms-appx:///Hacks/DataGrid.xaml" />
+                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
 	</Application.Resources>
 
 </Application>

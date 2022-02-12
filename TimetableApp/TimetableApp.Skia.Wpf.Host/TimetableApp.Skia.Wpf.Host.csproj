@@ -3,12 +3,12 @@
   <PropertyGroup>
     <OutputType Condition="'$(Configuration)'=='Release'">WinExe</OutputType>
     <OutputType Condition="'$(Configuration)'=='Debug'">Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFrameworks>net6.0-windows;net472</TargetFrameworks>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Uno.UI.Skia.Wpf" Version="3.9.1" />
-    <PackageReference Include="Uno.UI.RemoteControl" Version="3.9.1" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.UI.Skia.Wpf" Version="4.2.0-dev.35" />
+    <PackageReference Include="Uno.UI.RemoteControl" Version="4.2.0-dev.35" Condition="'$(Configuration)'=='Debug'" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Fonts\uno-fluentui-assets.ttf" />
