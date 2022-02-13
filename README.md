@@ -53,10 +53,18 @@ The real timetable file MUST be in this format:
 - `AdditionalTags` is a `Dictionary<string, string>`, which contains custom properties. 
 git 
 ## Upcoming plans:  
-- Support for Windows 7 (using WPF) and for Linux (GTK). We are not currently supporting these platforms because Uno's renderers are currently under development.
-- Support for iOS: Currently not provided because I don't have any Apple devices to test on! You can still build for iOS from source, of course, if you have a Mac or an iPhone.
 - Timetable Editor: We will create this if the project gets more popularity, as not many teachers know JSON!
 - Custom credentials: Currently, our users only use Zoom for online classes. Extensions might be done on user request.
 
-## Related issues:
-- [#4319](https://github.com/unoplatform/uno/issues/4319) TextBox is not working at all in Uno, making the Gtk port unusable. This should be fixed soon, in 3.7 release.
+## Related issues:  
+### Uno Platform's macOS specific issues:  
+- [#7312](https://github.com/unoplatform/uno/issues/7312) \[MacOS\] NavigationView Items not working. (Scheduled for Uno Platform 3.11 release but still not fixed now.)
+- [#7319](https://github.com/unoplatform/uno/issues/7319) \[macOS\] Application freezes when DataGrid contains data.
+
+These two issues are making _any_ support for macOS impossible.
+
+### Uno Platform's theming issues:  
+- [#7210](https://github.com/unoplatform/uno/issues/7210) Weird dark mode NavigationView colors.
+- [#7212](https://github.com/unoplatform/uno/issues/7212) \[Skia.GTK\] Applications do not respond to Dark mode themes. The method Uno Platform uses to detect Dark/Light mode for Skia.GTK is currently faulty.
+
+Because of these two issues, for platforms other than UWP (Windows), we are locking TimetableApp in Light mode.
