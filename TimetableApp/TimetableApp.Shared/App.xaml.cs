@@ -41,12 +41,6 @@ namespace TimetableApp
 #if HAS_UNO || NETFX_CORE
             this.Suspending += OnSuspending;
 #endif
-
-            // Hack until issue:
-            // https://github.com/unoplatform/uno/issues/7210 is resolved.
-#if HAS_UNO
-            RequestedTheme = ApplicationTheme.Light;
-#endif
         }
 
         /// <summary>
