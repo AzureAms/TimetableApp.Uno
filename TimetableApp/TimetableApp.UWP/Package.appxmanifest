@@ -7,7 +7,7 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="com.AzureAms.TimetableApp"
+    Name="org.azureams.TimetableApp"
     Publisher="CN=AzureAms Programming Club"
     Version="0.1.0.0" />
 
