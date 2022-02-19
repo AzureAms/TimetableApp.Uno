@@ -65,16 +65,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="ToastNotification.Uno">
-      <Version>0.1.5</Version>
-    </PackageReference>
-    <PackageReference Include="Uno.Microsoft.Toolkit.Uwp.UI.Controls.DataGrid">
-      <Version>7.1.11</Version>
-    </PackageReference>
+    <PackageReference Include="ToastNotification.Uno" Version="0.1.7" />
+    <PackageReference Include="Uno.Microsoft.Toolkit.Uwp.UI.Controls.DataGrid" Version="7.1.11" />
     <PackageReference Include="Uno.UI" Version="4.0.13" />
-    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging">
-      <Version>4.0.13</Version>
-    </PackageReference>
+    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.0.13" />
     <PackageReference Include="Uno.UI.RemoteControl" Version="4.0.13" Condition="'$(Configuration)'=='Debug'" />
     <PackageReference Include="Uno.UniversalImageLoader" Version="1.9.35" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
