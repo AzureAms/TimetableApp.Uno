@@ -58,13 +58,12 @@ git
 
 ## Related issues:  
 ### Uno Platform's macOS specific issues:  
-- [#7312](https://github.com/unoplatform/uno/issues/7312) \[MacOS\] NavigationView Items not working. (Scheduled for Uno Platform 3.11 release but still not fixed now.)
-- [#7319](https://github.com/unoplatform/uno/issues/7319) \[macOS\] Application freezes when DataGrid contains data.
+- [#7319](https://github.com/unoplatform/uno/issues/7319) \[macOS\] Application freezes when DataGrid contains data. (Not fixed but closed by the Uno Platform maintainers).
+- [#8110](https://github.com/unoplatform/uno/issues/8110) \[macOS\] DataGrid on a TabView not appearing in macOS (Similar issue, TimetableApp also uses a DataGrid on a TabView).
 
-These two issues are making _any_ support for macOS impossible.
+This issue is making _any_ support for macOS impossible.
 
-### Uno Platform's theming issues:  
-- [#7210](https://github.com/unoplatform/uno/issues/7210) Weird dark mode NavigationView colors.
+### Uno Platform's Linux specific issues:
 - [#7212](https://github.com/unoplatform/uno/issues/7212) \[Skia.GTK\] Applications do not respond to Dark mode themes. The method Uno Platform uses to detect Dark/Light mode for Skia.GTK is currently faulty.
-
-Because of these two issues, for platforms other than UWP (Windows), we are locking TimetableApp in Light mode.
+- [#8643](https://github.com/unoplatform/uno/issues/8643) \[Skia\] OpenGL render surface fails with a null reference on WSL. TimetableApp is still forced to use software rendering.
+- [#8661](https://github.com/unoplatform/uno/issues/8661) MessageDialog does not show Close button on Skia.GTK (Linux, WSL). Currently, TimetableApp.Skia.GTK still uses the [native MessageDialog hack](https://github.com/AzureAms/TimetableApp.Uno/blob/master/TimetableApp/TimetableApp.Skia.Gtk/MessageDialog.cs).
