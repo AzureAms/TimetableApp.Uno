@@ -11,9 +11,9 @@
     <StackPanel>
         <TextBlock Style="{StaticResource TitleTextBlockStyle}" Text="Timetable"/>
         <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="Copyright (C) 2021 Trung Nguyen"/>
+        <TextBlock Style="{StaticResource SubtitleTextBlockStyle}" Text="Copyright (C) 2022 AzureAms Programming Club"/>
         <TextBlock Style="{StaticResource BodyTextBlockStyle}">
-            <Span xml:space="preserve"><Run>This program is free software, covered by the terms of the </Run><Hyperlink NavigateUri="https://github.com/trungnt2910/RootLicense/blob/master/LICENSE.md">Root License</Hyperlink><Run>.</Run></Span>
+            <Span xml:space="preserve"><Run>This program is licensed under the </Run><Hyperlink NavigateUri="https://github.com/AzureAms/TimetableApp.Uno/blob/master/LICENSE.md">MIT License</Hyperlink><Run>.</Run></Span>
         </TextBlock> 
-        <TextBlock Style="{StaticResource BodyTextBlockStyle}" FontWeight="Bold" Text="This program is provided &quot;AS-IS&quot;, without warranties of any kind, expressed or implied. You use this program AT YOUR OWN RISK."/>
     </StackPanel>
 </ContentDialog>

@@ -1,6 +1,6 @@
 # Timetable
 Copyright (C) 2021 Trung Nguyen  
-Copyright (C) 2021 AzureAms Open Source Community
+Copyright (C) 2022 AzureAms Programming Club
 
 ## The MIT license
 
