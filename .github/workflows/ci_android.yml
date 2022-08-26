@@ -24,7 +24,7 @@ jobs:
 
     env:
       BUILD_CONFIG: 'Release'
-      PACKAGE_NAME: com.azureams.TimetableApp
+      PACKAGE_NAME: org.azureams.TimetableApp
 
     name: Build app (Android)
     # Also need to run on Windows Server 2022
@@ -48,7 +48,7 @@ jobs:
       run: nuget restore TimetableApp.Uno.sln
 
     - name: Build
-      run: msbuild TimetableApp/TimetableApp.Droid/TimetableApp.Droid.csproj /t:PackageForAndroid /p:Configuration=Release
+      run: msbuild TimetableApp/TimetableApp.Droid/TimetableApp.Droid.csproj /p:Configuration=Release /p:AndroidBuildApplicationPackage=true
 
     - name: Publish arm64 APK
       uses: actions/upload-artifact@v2

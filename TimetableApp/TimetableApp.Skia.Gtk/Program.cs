@@ -16,6 +16,10 @@ namespace TimetableApp.Skia.Gtk
 
             var host = new GtkHost(() => new App(), args);
 
+            // OpenGL render does not work on some environments,
+            // such as WSL. See unoplatform/uno#8643
+            host.RenderSurfaceType = RenderSurfaceType.Software;
+
             host.Run();
         }
     }

@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:TimetableApp.WPF.Host"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <ResourceDictionary Source="WpfHost.xaml" />
+
     </Application.Resources>
 </Application>

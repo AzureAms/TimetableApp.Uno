@@ -26,6 +26,10 @@ jobs:
     steps:
         # Checkout the code
         - uses: actions/checkout@v2
+          with:
+            # For the DataGrid
+            fetch-depth: 0
+            submodules: 'recursive'
 
         - name: Setup MSBuild
           uses: microsoft/setup-msbuild@v1.0.2

@@ -13,9 +13,5 @@ namespace TimetableApp.WPF.Host
     /// </summary>
     public partial class App : Application
     {
-        static App()
-        {
-            Skia.Wpf.MessageBox.Show = (Content, Title) => MessageBox.Show(Content, Title, MessageBoxButton.OK);
-        }
     }
 }
